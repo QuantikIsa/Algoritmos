@@ -15,22 +15,24 @@ Miguel Magdalena Sánchez (m.magdalenas)
 	Lo primero que haremos será traducir el pseudocódigo de los algoritmos a código c. Para comprobar su funcionamiento, realizaremos una 
 	serie de tests en los cuales comprobaremos el correcto funcionamiento de la implementación de cada uno de los algoritmos en dicho lenguaje.
   
-	Una vez realizadas las pruebas y comprobado que los algoritmo funcionan, dando ambos el mismo resultado, realizaremos las pruebas empíricas, obteniendo en estas las cotas:
-	ajustada, sobreestimada y subestimada acordes con los resultados. Definidas las cuales finalizaremos la práctica presentando nuestras conclusiones.
+	Una vez realizadas las pruebas y comprobado que los algoritmos funcionan, dando ambos el mismo resultado, realizaremos las pruebas empíricas, obteniendo en estas las cotas:
+	ajustada, sobrestimada y subestimada acordes con los resultados. Definidas las cuales finalizaremos la práctica presentando nuestras conclusiones.
 
 
 
 2.- MEDICIONES
 	Para realizar las mediciones utilizamos una partición de Ubuntu 24.04.3 LTS en un portátil con las siguientes características:
+
+	Modelo: Modern 14 C13M	
+	Memoria RAM:  16,0 GiB
+	Procesador: 13th Gen Intel® Core™ i7-1355U × 12
+    	Reloj: 1.70 GHz
 	
-	memoria ram =  16,0 GiB
-	cpu = 13th Gen Intel® Core™ i7-1355U × 12
-    	reloj: 
       
       Debemos destacar que repetimos varias veces las mediciones y que en cada una de ellas, por cada algoritmo, imprimimos por pantalla 5 veces su 
       tabla de tiempos quedándonos con la mejor.
-      Las unidades de tiempo utilizadas son microsegundos y el tamaño de  las entradas sigue una progresión geométrica de razón 2, empezando en 500 para ambos algoritmos
-      (SumaSubMax1 y SumaSubMax2). Eso sí, en el primero de ellos terminamos las mediciones en 32000, mientras que en el segundo lo hacemos en 256000.
+      Las unidades de tiempo utilizadas son microsegundos y el tamaño de las entradas sigue una progresión geométrica de razón 2, empezando en 500 para
+ambos algoritmos (SumaSubMax1 y SumaSubMax2). Eso sí, en el primero de ellos terminamos las mediciones en 32000, mientras que en el segundo lo hacemos en 256000.
       
 
 
@@ -46,13 +48,17 @@ Test 1 (Vector predeterminado)
 [   7  -5   6   7  -7  ]                 15              15
 
 Test 2 (Vector de números aleatorios)
-						sumaSubMax1	sumaSubMax2
-[   9  -6   1   0 -10   6  -6  -4  -3  10  ]             10              10
-[   8  10   4   7  -8  -7   3  -4  -8  -7  ]             29              29
-[  10   2  -1   6 -10  -9   8   9   2   4  ]             23              23
-[   1  -2   7  -9   9   5   8  -8 -10  -6  ]             22              22
-[  10   7  -9   4   3  -7   5  -4  -1   7  ]             17              17
-[  -3  -1  -1   4  -8  -3   4   9  -5  -5  ]             13              13
+                                                sumaSubMax1     sumaSubMax2
+[  -4   4   0   2   3   3  -9   6  -9  ]                 12              12
+[   6  -2  -7  -9   9  -9  -2  -9   7  ]                  9               9
+[   7   6  -8  -4   7  -7  -3   7   2  ]                 13              13
+[  -7   8   0  -3  -9  -6   3   2   3  ]                  8               8
+[  -4  -1  -1  -7  -5   4  -5  -8   3  ]                  4               4
+[  -4  -4   0  -7  -6  -4  -5  -1  -9  ]                  0               0
+[  -6   5   7   5   4   2  -8  -9   2  ]                 23              23
+[  -7   0  -6   5   6  -1  -8   8   3  ]                 13              13
+[   5  -9   2  -5  -7   7   4  -5   7  ]                 13              13
+[   9  -4  -4   6  -1   7   1  -8   2  ]                 14              14
 
 
 4.- ALGORITMOS DE SUMA DE LA SUBSECUENCIA MÁXIMA:
@@ -67,13 +73,13 @@ SumaSubMax1----------------------
       8000       51380.000          0.004844            0.000803          0.000133
      16000      206893.000          0.005602            0.000808          0.000117
      32000      836849.000          0.006507            0.000817          0.000103
-				cota subestimada      cota ajustada   cota sobreestimada
+				cota subestimada      cota ajustada   cota sobrestimada
 				     		      tiende a una 			
-				    		      cnt = 0.000806
+				    		      cnt = 0.000812
 
 	·OBSERVACIONES:
-		La cota n^1.8 diverge cuando n tiende a infinito, dando lugar a una cota subestimada. Esta realiza un constate incremento de su valor. En caso de la cota n^2.2 ocurre
-		lo contrario, sus valores disminuyen su valor progresivamente tratandose por lo tanto de una cota sobreestimada. Finalmente, la cota n^2 mantiene constantes sus
+		La cota n^1.8 diverge cuando n tiende a infinito, dando lugar a una cota subestimada. Ésta realiza un constate incremento de su valor. En caso de la cota n^2.2 ocurre
+		lo contrario, sus valores disminuyen su valor progresivamente tratándose por lo tanto de una cota sobrestimada. Finalmente, la cota n^2 mantiene constantes sus
 		valores, debemos definirla por lo tanto como una cota ajustada.
 
 
@@ -90,16 +96,14 @@ SumaSubMax2----------------------
 (*)     64000         123.892          0.017705            0.001936            0.000175
 (*)    128000         243.893          0.020018            0.001905            0.000162
 (*)    256000         487.443          0.022979            0.001904            0.000153
-				   cota subestimada     cota ajustada    cota sobreestimada
+				   cota subestimada     cota ajustada    cota sobrestimada
 					 		tiende a una 			
 							cnt =0.001903
-							
-							media = 0.002123
 
 	·OBSERVACIONES:
-		A medida que n tiende a infinto las distintas cotas se comportan de la siguiente forma en este algoritmo: n^0.8 aumenta sus valores, siendo esta la cota 
-		subestimada. En el caso de n, esta sería la cota ajustada al mantener constante sus valores. Finalmente nlong(n) decrece sus valores siendo esta la cota 
-		sobreestimada.
+		A medida que n tiende a infinito las distintas cotas se comportan de la siguiente forma en este algoritmo: n^0.8 aumenta sus valores, siendo ésta la cota 
+		subestimada. En el caso de n, ésta sería la cota ajustada al mantener constante sus valores. Finalmente nlog(n) decrece sus valores siendo esta la cota 
+		sobrestimada.
 		
 (*) Tiempo promedio en 1000 ejecuciones del algoritmo.
 
